@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, DECIMAL, Time
+from sqlalchemy import ForeignKey
 
 from database import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -30,7 +30,7 @@ class Book(Base):
     title: Mapped[str]
     author_id: Mapped[int] = mapped_column(ForeignKey("author.id"))
     genre_id: Mapped[int] = mapped_column(ForeignKey("genre.id"))
-    price: Mapped[float] = mapped_column(DECIMAL(10, 2))
+    price: Mapped[float]
     quantity: Mapped[int]
 
     author: Mapped["Author"] = relationship(back_populates="books")
@@ -42,7 +42,7 @@ class City(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
-    delivery_time: Mapped[time] = mapped_column(Time)
+    delivery_time: Mapped[time]
 
     clients: Mapped["Client"] = relationship(back_populates="city")
 
