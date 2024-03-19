@@ -11,7 +11,7 @@ class Genre(Base):
     id: Mapped[intpk]
     name: Mapped[str30]
 
-    books: Mapped["Book"] = relationship(back_populates="genre")
+    books: Mapped[list["Book"]] = relationship(back_populates="genre")
 
 
 class Author(Base):
@@ -20,7 +20,7 @@ class Author(Base):
     id: Mapped[intpk]
     name: Mapped[str30]
 
-    books: Mapped["Book"] = relationship(back_populates="author")
+    books: Mapped[list["Book"]] = relationship(back_populates="author")
 
 
 class Book(Base):
@@ -44,7 +44,7 @@ class City(Base):
     name: Mapped[str30]
     delivery_time: Mapped[time]
 
-    clients: Mapped["Client"] = relationship(back_populates="city")
+    clients: Mapped[list["Client"]] = relationship(back_populates="city")
 
 
 class Client(Base):
@@ -56,7 +56,7 @@ class Client(Base):
     city_id: Mapped[int] = mapped_column(ForeignKey("city.id"))
 
     city: Mapped["City"] = relationship(back_populates="clients")
-    buys: Mapped["Buy"] = relationship(back_populates="client")
+    buys: Mapped[list["Buy"]] = relationship(back_populates="client")
 
 
 class Buy(Base):
@@ -67,7 +67,7 @@ class Buy(Base):
     wishes: Mapped[str]
 
     client: Mapped["Client"] = relationship(back_populates="buys")
-    buy_books: Mapped["BuyBook"] = relationship(back_populates="buy")
+    buy_books: Mapped[list["BuyBook"]] = relationship(back_populates="buy")
 
 
 class BuyBook(Base):
@@ -87,7 +87,7 @@ class Step(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str30]
 
-    buy_steps: Mapped["BuyStep"] = relationship(back_populates="step")
+    buy_steps: Mapped[list["BuyStep"]] = relationship(back_populates="step")
 
 
 class BuyStep(Base):
